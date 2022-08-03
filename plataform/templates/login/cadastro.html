@@ -1,0 +1,37 @@
+{% extends 'layouts/index.html' %}
+{% load static %}
+{% block title %}Bazar Virtual - Cadastro{% endblock %}
+
+{% block content %}
+
+
+    
+
+<section class="container-sm" style="max-width:500px">
+    <form action="{% url 'plataform:cadastro' %}" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="next" value="{{ next }}">
+        <div class="mb-4 text-center">
+            <p class="fs-2">Faça seu cadastro</p>
+        </div>
+        <div class="text-center">
+            <span class="text-danger">{{erro}}</span>
+        </div>
+        <div class="mb-3">
+          <label for="username" class="form-label">Username:</label>
+          <input type="text" name="username" class="form-control" id="username" aria-describedby="emailHelp" required>
+        </div>
+        <div class="mb-3">
+            <label for="email">Email:</label>
+            <input type="email" name="email" class="form-control" id="email" required>
+        </div>
+        <div class="mb-3">
+          <label for="password" class="form-label">Senha:</label>
+          <input type="password" name="password" class="form-control" id="password" required>
+        </div>
+        <button type="submit" class="btn btn-primary mb-4">Cadastrar-se</button>
+        <p>Já possui conta? <a href="{% url 'plataform:login' %}">Entrar</a></p>
+    </form>
+</section>
+
+{% endblock %}

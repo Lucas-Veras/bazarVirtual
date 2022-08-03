@@ -1,0 +1,30 @@
+{% extends 'layouts/index.html' %}
+{% load static %}
+{% block title %}Bazar Virtual - Login{% endblock %}
+
+{% block content %}
+
+<div class="container-sm" style="max-width:500px">
+    <form action="{% url 'plataform:login' %}" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="next" value="{{ next }}">
+        <div class="mb-4 text-center">
+            <p class="fs-2">Faça login na sua conta</p>
+        </div>
+        <div class="text-center">
+            <span class="text-danger">{{erro}}</span>
+        </div>
+        <div class="mb-3">
+          <label for="username" class="form-label">Username:</label>
+          <input type="text" name="username" class="form-control" id="username" aria-describedby="emailHelp" required>
+        </div>
+        <div class="mb-3">
+          <label for="password" class="form-label">Senha:</label>
+          <input type="password" name="password" class="form-control" id="password" required>
+        </div>
+        <button type="submit" class="btn btn-primary mb-4">Entrar</button>
+        <p>Não possui conta? <a href="{% url 'plataform:cadastro' %}">Cadastre-se</a></p>
+      </form>
+</div>
+
+{% endblock %}
