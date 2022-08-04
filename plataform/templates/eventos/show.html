@@ -1,0 +1,29 @@
+{% extends 'layouts/index.html' %}
+{% load static %}
+{% block title %}Bazar Virtual - Eventos{% endblock %}
+
+{% block content %}
+    <main class="container-fluid px-4 mb-5">
+        <h2 class="fs-1">Produtos do Evento: {{evento.nome | title}}</h2>
+        <h3 class="fs-4">Evento Criado por: {{evento.usuario}}</h3>
+        <p class="mb-4 fs-5">Descrição do evento: {{evento.descricao}}</p>
+        <section class="d-flex flex-row flex-wrap align-items-start gap-2">
+        {% if produtos %}
+            {% for produto in produtos %}
+                <div class="card" style="width: 18rem;">
+                    <img src="https://psicologianoesporte.com.br/wp-content/uploads/2016/03/atencao-teste.jpg" class="card-img-top" alt="...">
+                <div class="card-body">
+                <h5 class="card-title">{{produto.nome | title}}</h5>
+                <p class="card-text">Publicador: {{produto.usuario | title}}</p>
+                <p class="card-text">Descrição: Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet praesentium, excepturi libero, nam nostrum vel voluptatem tenetur est!</p>
+                <p class="card-text">R$ {{produto.preco}}</p>
+                <a href="#" class="btn btn-primary">Reservar</a>
+                </div>
+                </div>   
+            {% endfor %}
+        {% else %}
+                <h3>Não há produtos cadastrados nesse evento</h3>
+        {% endif %}
+            
+        </section>
+{% endblock %}}

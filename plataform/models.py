@@ -9,7 +9,7 @@ class Usuario(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f"Nome: {self.user.username}"
+        return f"{self.user.username}"
 
 class Evento(models.Model):
     usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
@@ -17,7 +17,7 @@ class Evento(models.Model):
     descricao = models.CharField(max_length=200)
 
     def __str__(self):
-        return f"Nome do evento: {self.nome} - descricão: {self.descricao}"
+        return f"{self.nome}"
         
 
 class Produto(models.Model):

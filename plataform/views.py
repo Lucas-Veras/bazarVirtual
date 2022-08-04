@@ -1,6 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.views import View
-from .models import Produto, Usuario
+from .models import Produto, Usuario, Evento
 from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
 from django.urls import reverse
@@ -24,6 +24,17 @@ class ProdutosPage(View):
         produtos = Produto.objects.all()
         contexto = {'produtos': produtos}
         return render(request, 'index.html', contexto)
+
+class EventoPage(View):
+    def get(self, request, *args, **kwargs):
+        eventos = Evento.objects.all()
+        contexto = {'eventos': eventos}
+        return render(request, 'eventos/index.html', contexto)
+
+def EventoProdutos(request, evento_id):
+    evento = Evento.objects.get(id = evento_id)
+    produtos = Produto.objects.filter(evento_id = evento_id)
+    return render(request, 'eventos/show.html', {'evento': evento ,'produtos': produtos})
 
 class Login(View):
     def get(self, request, *args, **kwargs):
@@ -52,7 +63,6 @@ class CadastroUsusario(View):
 
     def post(self, request, *args, **kwargs):
         username = request.POST['username']
-        # posteriormente verificar se já existe conta com o msm email,cpf.
         email = request.POST['email']
         password = request.POST['password']
 
