@@ -36,6 +36,22 @@ def EventoProdutos(request, evento_id):
     produtos = Produto.objects.filter(evento_id = evento_id)
     return render(request, 'eventos/show.html', {'evento': evento ,'produtos': produtos})
 
+class CadastroEvento(View):
+    def get(self, request, *args, **kwargs):
+        return render(request, 'cadastroEvento/index.html')
+    
+    def post(self, request, *args, **kwargs):
+        nomeEvento = request.POST['nomeEvento']
+        descricaoEvento = request.POST['descricaoEvento']
+
+        if nomeEvento and descricaoEvento:
+            novoEvento = Evento(usuario=request.user.usuario, nome=nomeEvento, descricao=descricaoEvento)
+            novoEvento.save()
+            return HttpResponseRedirect(reverse('plataform:eventos'))
+        else:
+            erro = 'Preencha todos os campos'
+            return render(request, 'cadatstroEvento/index.html', {'erro': erro})
+        
 class Login(View):
     def get(self, request, *args, **kwargs):
         return render(request, 'login/login.html')

@@ -4,9 +4,16 @@
 
 {% block content %}
     <main class="container-fluid px-4 mb-5">
-        <h2 class="fs-1">Produtos do Evento: {{evento.nome | title}}</h2>
-        <h3 class="fs-4">Evento Criado por: {{evento.usuario}}</h3>
-        <p class="mb-4 fs-5">Descrição do evento: {{evento.descricao}}</p>
+        <div class="d-flex flex-row justify-content-between align-items-center mb-2 flex-wrap">
+            <div>
+                <h2 class="fs-1">Produtos do Evento: {{evento.nome | title}}</h2>
+                <h3 class="fs-4">Evento Criado por: {{evento.usuario}}</h3>
+                <p class="mb-4 fs-5">Descrição do evento: {{evento.descricao}}</p>
+            </div>
+            <div>
+                <a href="#" class="btn btn-primary">Anunciar Produto</a>
+            </div>
+        </div>
         <section class="d-flex flex-row flex-wrap align-items-start gap-2">
         {% if produtos %}
             {% for produto in produtos %}

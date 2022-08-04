@@ -26,9 +26,14 @@
                             <a href="/" class="nav-item nav-link">Produtos</a>
                         {% endif %}
                         {% if request.get_full_path == '/eventos/' %}
-                        <a href="{% url 'plataform:eventos' %}" class="nav-item nav-link active">Eventos</a>
+                            <a href="{% url 'plataform:eventos' %}" class="nav-item nav-link active">Eventos</a>
                         {% else %}
-                        <a href="{% url 'plataform:eventos' %}" class="nav-item nav-link">Eventos</a>
+                            <a href="{% url 'plataform:eventos' %}" class="nav-item nav-link">Eventos</a>
+                        {% endif %}
+                        {% if request.get_full_path == '/cadastrarevento/' %}
+                            <a href="{% url 'plataform:cadastroEvento' %}" class="nav-item nav-link active"> Criar Evento</a>
+                        {% else %}
+                            <a href="{% url 'plataform:cadastroEvento' %}" class="nav-item nav-link"> Criar Evento</a>
                         {% endif %}
                     </div>
                     {% if request.user.usuario is None %}
