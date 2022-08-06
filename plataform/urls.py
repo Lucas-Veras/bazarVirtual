@@ -7,6 +7,7 @@ urlpatterns = [
     path('', views.ProdutosPage.as_view(), name="index"),
     path('eventos/', views.EventoPage.as_view(), name="eventos"),
     path('eventos/<int:evento_id>/', views.EventoProdutos, name='eventoProdutos'),
+    path('cadastrarevento/', views.CadastroEvento.as_view(), name="cadastroEvento"),
 
     path('cadastrarevento/', views.CadastroEvento.as_view(), name="cadastroEvento"),
     path('cadastrarproduto/', views.CadastroProduto.as_view(), name="cadastroProduto"),
