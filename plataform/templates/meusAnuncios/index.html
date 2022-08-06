@@ -19,8 +19,6 @@
                     <a href="{% url 'plataform:deleteAnuncio' produto.id %}" class="btn btn-danger">Deletar</a>
                     </div>
                 </div>   
-            {% else %}
-                <h2>Não tenho anúncios cadastrados</h2>
             {% endif %}
         {% endfor %}
     {% else %}
