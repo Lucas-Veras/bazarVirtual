@@ -13,7 +13,7 @@
 <body>
     <header class="mb-4">
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <div class="container-fluid m-2 px-5">
+            <div class="container-fluid m-3 px-5">
                 <a href="/" class="navbar-brand">Bazar Virtual</a>
                 <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                     <span class="navbar-toggler-icon"></span>
@@ -26,9 +26,19 @@
                             <a href="/" class="nav-item nav-link">Produtos</a>
                         {% endif %}
                         {% if request.get_full_path == '/eventos/' %}
-                        <a href="{% url 'plataform:eventos' %}" class="nav-item nav-link active">Eventos</a>
+                            <a href="{% url 'plataform:eventos' %}" class="nav-item nav-link active">Eventos</a>
                         {% else %}
-                        <a href="{% url 'plataform:eventos' %}" class="nav-item nav-link">Eventos</a>
+                            <a href="{% url 'plataform:eventos' %}" class="nav-item nav-link">Eventos</a>
+                        {% endif %}
+                        {% if request.get_full_path == '/cadastrarevento/' %}
+                            <a href="{% url 'plataform:cadastroEvento' %}" class="nav-item nav-link active"> Criar Evento</a>
+                        {% else %}
+                            <a href="{% url 'plataform:cadastroEvento' %}" class="nav-item nav-link"> Criar Evento</a>
+                        {% endif %}
+                        {% if request.get_full_path == '/cadastrarproduto/' %}
+                            <a href="{% url 'plataform:cadastroProduto' %}" class="nav-item nav-link active"> Anuncie um produto</a>
+                        {% else %}
+                            <a href="{% url 'plataform:cadastroProduto' %}" class="nav-item nav-link"> Anuncie um produto</a>
                         {% endif %}
                     </div>
                     {% if request.user.usuario is None %}
@@ -44,6 +54,9 @@
                             </a>
                             <ul class="dropdown-menu">
                               <li><a class="dropdown-item" href="#">Perfil</a></li>
+                              <li><a class="dropdown-item" href="{% url 'plataform:meusEventos' %}">Meus Eventos</a></li>
+                              <li><a class="dropdown-item" href="{% url 'plataform:meusAnuncios' %}">Meus Anuncios</a></li>
+                              <li><a class="dropdown-item" href="{% url 'plataform:minhasReservas' %}">Minhas Reservas</a></li>
                               <li><hr class="dropdown-divider"></li>
                               <li><a class="dropdown-item" href="{% url 'plataform:logout' %}">Deslogar</a></li>
                             </ul>

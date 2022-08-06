@@ -4,7 +4,7 @@
 
 {% block content %}
     <main class="container-fluid px-4 mb-5">
-        <h2 class="mb-4 fs-1">Produtos</h2>
+        <h2 class="mb-4 fs-1">Meus Anúncios</h2>
         <section class="d-flex flex-row flex-wrap align-items-start gap-2">
     {% if produtos %}
         {% for produto in produtos %}
@@ -12,14 +12,15 @@
                 <div class="card" style="width: 18rem;">
                   <!--  <img src="{{ produto.imagem.url }}" class="card-img-top" alt="...">-->
                     <div class="card-body">
-                        <h5 class="card-title">{{produto.nome | title}}</h5>
-                        <p class="card-text">Publicador: {{produto.usuario | title}}</p>
-                        <p class="card-text">Evento: {{produto.evento | title}} </p>
-                        <p class="card-text">Descrição: {{produto.descricao}}</p>
-                        <p class="card-text">R$ {{produto.preco}}</p>
-                        <a href="{% url 'plataform:reservar' produto.id %}" class="btn btn-primary">Reservar</a>
+                    <h5 class="card-title">{{produto.nome | title}}</h5>
+                    <p class="card-text">Evento: {{produto.evento | title}} </p>
+                    <p class="card-text">Descrição: {{produto.descricao}}</p>
+                    <p class="card-text">R$ {{produto.preco}}</p>
+                    <a href="{% url 'plataform:deleteAnuncio' produto.id %}" class="btn btn-danger">Deletar</a>
                     </div>
                 </div>   
+            {% else %}
+                <h2>Não tenho anúncios cadastrados</h2>
             {% endif %}
         {% endfor %}
     {% else %}

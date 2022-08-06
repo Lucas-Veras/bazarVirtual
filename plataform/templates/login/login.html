@@ -7,7 +7,7 @@
 <div class="container-sm" style="max-width:500px">
     <form action="{% url 'plataform:login' %}" method="post">
         {% csrf_token %}
-        <input type="hidden" name="next" value="{{ next }}">
+        <input type="hidden" name="next" value="{{ request.GET.next }}">
         <div class="mb-4 text-center">
             <p class="fs-2">Faça login na sua conta</p>
         </div>

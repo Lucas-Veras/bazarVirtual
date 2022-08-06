@@ -1,0 +1,46 @@
+{% extends 'layouts/index.html' %}
+{% load static %}
+{% block title %}Bazar Virtual - Criar Evento{% endblock %}
+
+{% block content %}
+
+<div class="container-sm" style="max-width:500px">
+    <form action="{% url 'plataform:cadastroProduto' %}" method="post" enctype='multipart-form-data'>
+        {% csrf_token %}
+        <input type="hidden" name="next" value="{{ next }}">
+        <div class="mb-4 text-center">
+            <p class="fs-2">Anuncie um produto</p>
+        </div>
+        <div class="text-center mb-2">
+            <span class="text-danger">{{erro}}</span>
+        </div>
+        <div class="mb-3">
+            <label for="evento" class="form-label">Escolha o evento que seu produto ficará:</label>
+            <select name="evento" class="form-select" id="evento">
+                <option disabled selected>Selecione um evento</option>
+                {% for evento in eventos %}
+                <option value="{{evento.id}}">{{evento.nome}}</option>
+                {% endfor %}                  
+            </select>
+        </div>
+   <!--     <div class="mb-3">
+            <label for="imagemProduto" class="form-label">Imagem do Produto:</label>
+            <input type="file" name="imagemProduto" id="imagemProduto" accept="image/*" required>
+        </div>-->
+        <div class="mb-3">
+          <label for="nomeProduto" class="form-label">Nome do Produto:</label>
+          <input type="text" name="nomeProduto" class="form-control" id="nomeProduto" aria-describedby="emailHelp" required>
+        </div>
+        <div class="mb-3">
+          <label for="descricaoProduto" class="form-label">Descrição do Produto:</label>
+          <input type="text" name="descricaoProduto" class="form-control" id="descricaoProduto" required>
+        </div>
+        <div class="mb-3">
+            <label for="precoProduto" class="form-label">Preço do Produto:</label>
+            <input type="text" name="precoProduto" class="form-control" id="precoProduto" required>
+        </div>
+        <button type="submit" class="btn btn-primary mb-4">Anunciar Produto</button>
+      </form>
+</div>
+
+{% endblock %}

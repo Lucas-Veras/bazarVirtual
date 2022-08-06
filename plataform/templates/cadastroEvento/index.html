@@ -1,0 +1,29 @@
+{% extends 'layouts/index.html' %}
+{% load static %}
+{% block title %}Bazar Virtual - Criar Evento{% endblock %}
+
+{% block content %}
+
+<div class="container-sm" style="max-width:500px">
+    <form action="{% url 'plataform:cadastroEvento' %}" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="next" value="{{ next }}">
+        <div class="mb-4 text-center">
+            <p class="fs-2">Crie um evento para o bazar</p>
+        </div>
+        <div class="text-center">
+            <span class="text-danger">{{erro}}</span>
+        </div>
+        <div class="mb-3">
+          <label for="nomeEvento" class="form-label">Nome do evento:</label>
+          <input type="text" name="nomeEvento" class="form-control" id="nomeEvento" aria-describedby="emailHelp" required>
+        </div>
+        <div class="mb-3">
+          <label for="descricaoEvento" class="form-label">Descrição do evento:</label>
+          <input type="text" name="descricaoEvento" class="form-control" id="descricaoEvento" required>
+        </div>
+        <button type="submit" class="btn btn-primary mb-4">Criar evento</button>
+      </form>
+</div>
+
+{% endblock %}

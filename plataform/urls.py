@@ -8,6 +8,18 @@ urlpatterns = [
     path('eventos/', views.EventoPage.as_view(), name="eventos"),
     path('eventos/<int:evento_id>/', views.EventoProdutos, name='eventoProdutos'),
 
+    path('cadastrarevento/', views.CadastroEvento.as_view(), name="cadastroEvento"),
+    path('cadastrarproduto/', views.CadastroProduto.as_view(), name="cadastroProduto"),
+
+    path('meuseventos/', views.MeusEventos.as_view(), name="meusEventos"),
+    path('meusanuncios/', views.MeusAnuncios.as_view(), name="meusAnuncios"),
+    path('minhasreservas/', views.MinhasReservas.as_view(), name="minhasReservas"),
+
+    path("anuncio/<int:produto_id>/", views.deleteAnuncio, name="deleteAnuncio"),
+    path("evento/<int:evento_id>/", views.deleteEvento, name="deleteEvento"),
+
+    path("anuncio/<int:produto_id>/", views.ReservarProduto, name="reservar"),
+
     path('login/', views.Login.as_view(), name="login"),
     path('logout/', views.logoutView, name='logout'),
     path('cadastro/', views.CadastroUsusario.as_view(), name="cadastro"),

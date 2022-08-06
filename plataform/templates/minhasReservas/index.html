@@ -1,0 +1,28 @@
+{% extends 'layouts/index.html' %}
+{% load static %}
+{% block title %}Bazar Virtual - Produtos{% endblock %}
+
+{% block content %}
+    <main class="container-fluid px-4 mb-5">
+        <h2 class="mb-4 fs-1">Minhas Reservas</h2>
+        <section class="d-flex flex-row flex-wrap align-items-start gap-2">
+    {% if reservas %}
+        {% for reserva in reservas %}
+                <div class="card" style="width: 18rem;">
+                  <!--  <img src="{{ produto.imagem.url }}" class="card-img-top" alt="...">-->
+                    <div class="card-body">
+                    <h5 class="card-title">{{reserva.produto.nome | title}}</h5>
+                    <p class="card-text">Anunciante: {{reserva.produto.usuario}}</p>
+                    <p class="card-text">Evento: {{reserva.produto.evento | title}} </p>
+                    <p class="card-text">Descrição: {{reserva.produto.descricao}}</p>
+                    <p class="card-text">R$ {{reserva.produto.preco}}</p>
+                    <a href="#" class="btn btn-danger" style="pointer-events: none;">Reservado</a>
+                    </div>
+                </div>   
+        {% endfor %}
+    {% else %}
+        <h2>Não há produtos reservados</h2>
+    {% endif %}
+        </section>
+    </main> 
+{% endblock %}

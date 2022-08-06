@@ -23,6 +23,8 @@ class Evento(models.Model):
 class Produto(models.Model):
     usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
     evento = models.ForeignKey(Evento, on_delete=models.CASCADE)
+    #imagem = models.ImageField(upload_to='images', null=True, blank=True)
+    descricao = models.CharField(max_length=200)
     nome = models.CharField(max_length=50)
     preco = models.DecimalField(max_digits=9, decimal_places=2)
     ehReservado = models.BooleanField(default=False)
@@ -32,5 +34,5 @@ class Produto(models.Model):
 
 class Reserva(models.Model):
     usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
-    evento = models.ForeignKey(Evento, on_delete=models.CASCADE)
+    #evento = models.ForeignKey(Evento, on_delete=models.CASCADE)
     produto = models.ForeignKey(Produto, on_delete=models.CASCADE)

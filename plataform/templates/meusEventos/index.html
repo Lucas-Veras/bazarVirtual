@@ -4,21 +4,20 @@
 
 {% block content %}
 <main class="container-fluid px-4 mb-5">
-    <h2 class="mb-4 fs-1">Eventos</h2>
+    <h2 class="mb-4 fs-1">Meus Eventos</h2>
     <section class="d-flex flex-row flex-wrap align-items-start gap-2">
 {% if eventos %}
     {% for evento in eventos %}
         <div class="card" style="width: 18rem;">
             <div class="card-body">
                 <h5 class="card-title">{{evento.nome | title}}</h5>
-                <p class="card-text">Criado por: {{evento.usuario | title}}</p>
                 <p class="card-text">Descrição: {{evento.descricao}}</p>
-                <a href="{% url 'plataform:eventoProdutos' evento.id %}" class="btn btn-primary">Ver produtos</a>
+                <a href="{% url 'plataform:deleteEvento' evento.id %}" class="btn btn-danger">Deletar</a>
             </div>
         </div>   
     {% endfor %}
 {% else %}
-    <h3>Não há eventos cadastrados</h3>
+    <h3>Não tenho eventos cadastrados</h3>
 {% endif %}
     </section>
 </main> 
