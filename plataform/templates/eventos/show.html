@@ -10,14 +10,10 @@
                 <h3 class="fs-4">Evento Criado por: {{evento.usuario}}</h3>
                 <p class="mb-4 fs-5">Descrição do evento: {{evento.descricao}}</p>
             </div>
-            <div>
-                <a href="#" class="btn btn-primary">Anunciar Produto nesse evento</a>
-            </div>
         </div>
         <section class="d-flex flex-row flex-wrap align-items-start gap-2">
         {% if produtos %}
             {% for produto in produtos %}
-                {% if produto.ehReservado == False %}
                     <div class="card" style="width: 18rem;">
                      <!--   <img src="https://psicologianoesporte.com.br/wp-content/uploads/2016/03/atencao-teste.jpg" class="card-img-top" alt="...">-->
                         <div class="card-body">
@@ -25,16 +21,16 @@
                         <p class="card-text">Publicador: {{produto.usuario | title}}</p>
                         <p class="card-text">Descrição: {{produto.descricao}}</p>
                         <p class="card-text">R$ {{produto.preco}}</p>
-                        <a href="#" class="btn btn-primary">Reservar</a>
+                        {% if request.user.usuario %}
+                            <a href="{% url 'plataform:reservar' produto.id %}" class="btn btn-primary">Reservar</a>
+                        {% else %}
+                            <a href="{% url 'plataform:login' %}" class="btn btn-primary">Reservar</a>
+                        {% endif %}
                         </div>
                     </div>   
-                {% else %}
-                    <h3>Todos os produtos desse evento foram reservados</h3>
-                {% endif %}
             {% endfor %}
         {% else %}
                 <h3>Não há produtos cadastrados nesse evento</h3>
         {% endif %}
-            
         </section>
 {% endblock %}}

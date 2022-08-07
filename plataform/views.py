@@ -1,4 +1,4 @@
-import re
+from tkinter.tix import Tree
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views import View
 from .models import Produto, Usuario, Evento, Reserva
@@ -25,9 +25,9 @@ class EmailBackend(ModelBackend):
 class ProdutosPage(View):
     def get(self, request, *args, **kwargs):
         if request.user.is_authenticated:
-            produtos = Produto.objects.exclude(usuario_id = request.user.usuario.id)
+            produtos = Produto.objects.exclude(usuario = request.user.usuario).filter(ehReservado = False)
         else:
-            produtos = Produto.objects.all()
+            produtos = Produto.objects.exclude(ehReservado = True)
             
         contexto = {'produtos': produtos}
         return render(request, 'index.html', contexto)
@@ -44,7 +44,7 @@ class EventoPage(View):
 
 def EventoProdutos(request, evento_id):
     evento = Evento.objects.get(id = evento_id)
-    produtos = Produto.objects.filter(evento_id = evento_id)
+    produtos = Produto.objects.filter(evento_id = evento_id).exclude(ehReservado = True)
     return render(request, 'eventos/show.html', {'evento': evento ,'produtos': produtos})
 
 @method_decorator(login_required(login_url="/login/"), name='dispatch')
@@ -98,8 +98,10 @@ class MeusEventos(View):
 @method_decorator(login_required(login_url="/login/"), name='dispatch')
 class MeusAnuncios(View):
     def get(self, request, *args, **kwargs):
-        produtos = Produto.objects.filter(usuario_id = request.user.usuario.id)
-        contexto = {'produtos': produtos}
+        produtos = Produto.objects.filter(usuario_id = request.user.usuario.id).filter(ehReservado = False)
+        anuncios = Produto.objects.filter(usuario_id = request.user.usuario.id)
+        reservados = Reserva.objects.filter(produto__usuario = request.user.usuario)
+        contexto = {'anuncios': anuncios, 'reservados': reservados, 'produtos': produtos}
         return render(request, 'meusAnuncios/index.html', contexto)
 
 @method_decorator(login_required(login_url="/login/"), name='dispatch')
@@ -109,13 +111,13 @@ class MinhasReservas(View):
         contexto = {'reservas': reservas}
         return render(request, 'minhasReservas/index.html', contexto)
 
-@method_decorator(login_required(login_url="/login/"), name='dispatch')
 def ReservarProduto(request, produto_id):
     produto = Produto.objects.get(id=produto_id)
     produto.ehReservado = True
+    produto.save()
     nova_reserva = Reserva(usuario=request.user.usuario, produto=produto)
     nova_reserva.save()
-    return redirect('plataform:minhasReservas')
+    return redirect('plataform:minhasReservas')  
 
 def deleteAnuncio(request, produto_id):
     produto = Produto.objects.get(id=produto_id)

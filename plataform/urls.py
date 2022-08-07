@@ -19,7 +19,7 @@ urlpatterns = [
     path("anuncio/<int:produto_id>/", views.deleteAnuncio, name="deleteAnuncio"),
     path("evento/<int:evento_id>/", views.deleteEvento, name="deleteEvento"),
 
-    path("anuncio/<int:produto_id>/", views.ReservarProduto, name="reservar"),
+    path("produto/<int:produto_id>/", views.ReservarProduto, name="reservar"),
 
     path('login/', views.Login.as_view(), name="login"),
     path('logout/', views.logoutView, name='logout'),
