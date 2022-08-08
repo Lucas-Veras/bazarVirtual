@@ -13,6 +13,9 @@
         </div>
         <div class="text-center mb-2">
             <span class="text-danger">{{erro}}</span>
+            {% if not eventos %}
+                <span class="text-danger">Não há eventos! Crie um evento para poder cadastrar seus produtos.</span>
+            {% endif %}
         </div>
         <div class="mb-3">
             <label for="evento" class="form-label">Escolha o evento que seu produto ficará:</label>
@@ -39,7 +42,11 @@
             <label for="precoProduto" class="form-label">Preço do Produto:</label>
             <input type="text" name="precoProduto" class="form-control" id="precoProduto" required>
         </div>
-        <button type="submit" class="btn btn-primary mb-4">Anunciar Produto</button>
+        {% if eventos %}
+            <button type="submit" class="btn btn-primary mb-4">Anunciar Produto</button>
+        {% else %}
+            <a href="{% url 'plataform:cadastroEvento' %}" class="btn btn-primary mb-4">Ir para Criar Evento</a>
+        {% endif %}
       </form>
 </div>
 
