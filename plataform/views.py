@@ -155,7 +155,7 @@ def logoutView(request):
     logout(request)
     return HttpResponseRedirect(reverse('plataform:index'))
 
-class CadastroUsusario(View): 
+class CadastroUsuario(View): 
     def get(self, request, *args, **kwargs):
         return render(request, 'login/cadastro.html')
 
